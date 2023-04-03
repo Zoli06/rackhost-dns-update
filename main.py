@@ -79,7 +79,8 @@ def update_dns_record(session, rackhost_url, dns_record_id, name=None, type=None
 
 
 def create_dns_record(session, rackhost_url, dns_zone_id, name, type, ttl, target):
-    r1 = session.get(f'{rackhost_url}/dnsRecord/createOther?dnsZoneId={dns_zone_id}')
+    r1 = session.get(
+        f'{rackhost_url}/dnsRecord/createOther?dnsZoneId={dns_zone_id}')
 
     csrf = get_csrf_from_response(r1)
 
@@ -172,7 +173,7 @@ def main():
     dns_zone_id = get_dns_zone_id(session, rackhost_url, domain)
     dns_record_id = get_dns_record_id(
         session, rackhost_url, dns_zone_id, dns_record)
-    
+
     if action == 'update':
         type = parser.parse_args().type
         ttl = parser.parse_args().ttl
