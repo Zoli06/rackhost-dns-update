@@ -20,9 +20,11 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
         name = hostname.split('.')[0] if len(hostname.split('.')) > 2 else ''
         
         # Get auth token from header
-        # base64(username:password)
+        # Authorization: Basic base64({username}:{password})
         auth = self.headers['Authorization']
-        given_username, given_password = base64.b64decode(auth.split(' ')[1]).decode('utf-8').split(':')
+        auth_decoded = base64.b64decode(auth.split(' ')[1]).decode('utf-8')
+        given_username = auth_decoded.split(':')[0]
+        given_password = auth_decoded.split(':')[1]
         
         print(f'Update {name}.{domain} to {myip}')
         
