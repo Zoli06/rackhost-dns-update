@@ -29,6 +29,11 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
         rackhost_username = os.getenv('RACKHOST_USERNAME')
         rackhost_password = os.getenv('RACKHOST_PASSWORD')
         
+        print(f'Given username: {given_username}')
+        print(f'Given password: {given_password}')
+        print(f'Rackhost username: {rackhost_username}')
+        print(f'Rackhost password: {rackhost_password}')
+        
         if (given_username != rackhost_username) or (given_password != rackhost_password):
             self.send_response(401)
             self.send_header('WWW-Authenticate', 'Basic realm="Rackhost DDNS"')
