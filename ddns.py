@@ -24,6 +24,8 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
         auth = self.headers['Authorization']
         given_username, given_password = base64.b64decode(auth.split(' ')[1]).decode('utf-8').split(':')
         
+        print(f'Update {name}.{domain} to {myip}')
+        
         rackhost_username = os.getenv('RACKHOST_USERNAME')
         rackhost_password = os.getenv('RACKHOST_PASSWORD')
         
@@ -31,9 +33,12 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
             self.send_response(401)
             self.send_header('WWW-Authenticate', 'Basic realm="Rackhost DDNS"')
             self.end_headers()
+            print('Unauthorized')
             return
         
+        print('Authorized')
         rackhost_main([domain, name, 'update', '--target', myip])
+        print('Done')
         
         self.send_response(200)        
         
