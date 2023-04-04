@@ -116,8 +116,8 @@ def finalize_dns_zone(session, rackhost_url, dns_zone_id):
 def main():
     # Load environment variables from .env file
     load_dotenv()
-    email = os.getenv('EMAIL')
-    password = os.getenv('PASSWORD')
+    email = os.getenv('RACKHOST_EMAIL')
+    password = os.getenv('RACKHOST_PASSWORD')
     rackhost_url = os.getenv('RACKHOST_URL')
     http_proxy = os.getenv('HTTP_PROXY')
     https_proxy = os.getenv('HTTPS_PROXY')
