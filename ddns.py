@@ -33,7 +33,7 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
             self.end_headers()
             return
         
-        main([domain, name, 'update', '--target', myip])
+        rackhost_main([domain, name, 'update', '--target', myip])
         
         self.send_response(200)        
         
