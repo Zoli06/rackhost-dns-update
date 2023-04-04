@@ -22,7 +22,9 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
         # Get auth token from header
         # Authorization: Basic base64({username}:{password})
         auth = self.headers['Authorization']
+        print(auth)
         auth_decoded = base64.b64decode(auth.split(' ')[1]).decode('utf-8')
+        print(auth_decoded)
         given_username = auth_decoded.split(':')[0]
         given_password = auth_decoded.split(':')[1]
         
