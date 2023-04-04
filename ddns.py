@@ -30,8 +30,8 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
         
         print(f'Update {name}.{domain} to {myip}')
         
-        rackhost_username = os.getenv('RACKHOST_USERNAME')
-        rackhost_password = os.getenv('RACKHOST_PASSWORD')
+        rackhost_username = os.getenv('DDNS_USERNAME')
+        rackhost_password = os.getenv('DDNS_USERNAME')
         
         print(f'Given username: {given_username}')
         print(f'Given password: {given_password}')
