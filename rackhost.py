@@ -113,7 +113,7 @@ def finalize_dns_zone(session, rackhost_url, dns_zone_id):
     session.get(f'{rackhost_url}/dnsZone/finalize/{dns_zone_id}')
 
 
-def main():
+def main(raw_args=None):
     # Load environment variables from .env file
     load_dotenv()
     email = os.getenv('RACKHOST_EMAIL')
@@ -154,10 +154,12 @@ def main():
     update_parser.add_argument('--newname', help='DNS record new name')
 
     subparsers.add_parser('delete', help='Delete DNS record')
+    
+    args = parser.parse_args(raw_args)
 
-    action = parser.parse_args().action
-    domain = parser.parse_args().domain
-    name = parser.parse_args().name
+    action = args.action
+    domain = args.domain
+    name = args.name
 
     dns_record = name + '.' + domain if name else domain
 
@@ -174,19 +176,19 @@ def main():
         session, rackhost_url, dns_zone_id, dns_record)
 
     if action == 'update':
-        type = parser.parse_args().type
-        ttl = parser.parse_args().ttl
-        target = parser.parse_args().target
-        newname = parser.parse_args().newname
+        type = args.type
+        ttl = args.ttl
+        target = args.target
+        newname = args.newname
         if not newname:
             newname = name
 
         update_dns_record(session, rackhost_url,
                           dns_record_id, newname, type, ttl, target)
     elif action == 'create':
-        type = parser.parse_args().type
-        ttl = parser.parse_args().ttl
-        target = parser.parse_args().target
+        type = args.type
+        ttl = args.ttl
+        target = args.target
         create_dns_record(session, rackhost_url, dns_zone_id,
                           name, type, ttl, target)
     elif action == 'delete':
