@@ -133,11 +133,11 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('domain', help='DNS zone domain')
+    parser.add_argument('name', help='DNS record name')
 
     subparsers = parser.add_subparsers(dest='action')
 
     create_parser = subparsers.add_parser('create', help='Create DNS record')
-    create_parser.add_argument('--name', help='DNS record name')
     create_parser.add_argument('--type', help='DNS record type', required=True, choices=[
                                'A', 'AAAA', 'CNAME', 'TXT'])
     create_parser.add_argument(
@@ -146,15 +146,14 @@ def main():
         '--target', help='DNS record target', required=True)
 
     update_parser = subparsers.add_parser('update', help='Update DNS record')
-    update_parser.add_argument('--name', help='DNS record name')
     update_parser.add_argument('--type', help='DNS record type', choices=[
                                'A', 'AAAA', 'CNAME', 'TXT'])
     update_parser.add_argument(
         '--ttl', help='DNS record TTL', choices=ttl_choices, type=int)
     update_parser.add_argument('--target', help='DNS record target')
+    update_parser.add_argument('--newname', help='DNS record new name')
 
-    delete_parser = subparsers.add_parser('delete', help='Delete DNS record')
-    delete_parser.add_argument('--name', help='DNS record name', required=True)
+    subparsers.add_parser('delete', help='Delete DNS record')
 
     action = parser.parse_args().action
     domain = parser.parse_args().domain
@@ -178,8 +177,12 @@ def main():
         type = parser.parse_args().type
         ttl = parser.parse_args().ttl
         target = parser.parse_args().target
+        newname = parser.parse_args().newname
+        if not newname:
+            newname = name
+
         update_dns_record(session, rackhost_url,
-                          dns_record_id, name, type, ttl, target)
+                          dns_record_id, newname, type, ttl, target)
     elif action == 'create':
         type = parser.parse_args().type
         ttl = parser.parse_args().ttl
