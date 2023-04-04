@@ -16,7 +16,7 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
 
 def main(server_class=http.server.HTTPServer, handler_class=http.server.BaseHTTPRequestHandler):
     server_address = ('', 8245)
-    httpd = server_class(server_address, handler_class)
+    httpd = server_class(server_address, MyHandler)
     httpd.serve_forever()
     
 if __name__ == '__main__':
