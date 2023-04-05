@@ -1,6 +1,5 @@
-FROM python:3.9 
-WORKDIR /usr/src/app
-COPY requirements.txt ./
+FROM python:3.9-alpine
+WORKDIR /app
 RUN pip install requests python-dotenv pyquery argparse
 COPY . .
 EXPOSE 8245:80
