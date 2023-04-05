@@ -1,6 +1,7 @@
 FROM python:3.9 
 WORKDIR /usr/src/app
-COPY . .
+COPY requirements.txt ./
 RUN pip install requests python-dotenv pyquery argparse
-EXPOSE 8245:8245
+COPY . .
+EXPOSE 8245:80
 CMD [ "python", "ddns.py" ]
