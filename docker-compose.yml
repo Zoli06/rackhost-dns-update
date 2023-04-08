@@ -1,8 +1,13 @@
 version: '3'
 services:
   rackhost_dns_update:
-    restart: always
+    image: rackhost_dns_update
+    container_name: rackhost_dns_update
     build:
+      dockerfile: Dockerfile
       context: ./src
+    ports:
+      - "8245:80"
+    restart: always
     env_file:
       - ./src/.env
