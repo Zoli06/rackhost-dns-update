@@ -1,2 +1,4 @@
-.env
-__pycache__
+**/__pycache__
+**/.env
+**/.dev.env
+**/.prod.env

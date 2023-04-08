@@ -75,6 +75,8 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
         return
 
 def main(server_class=http.server.HTTPServer, handler_class=http.server.BaseHTTPRequestHandler):
+    print("Starting server")
+    
     load_dotenv()
     
     # Check necessary environment variables

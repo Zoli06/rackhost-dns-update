@@ -1,0 +1,13 @@
+version: '3'
+services:
+  rackhost_dns_update:
+    image: rackhost_dns_update_dev
+    container_name: rackhost_dns_update_dev
+    build:
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./src:/app
+    env_file:
+      - ./src/.dev.env
+    ports:
+      - "9245:80"
