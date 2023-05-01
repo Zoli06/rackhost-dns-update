@@ -3,6 +3,7 @@ services:
   rackhost_dns_update:
     image: rackhost_dns_update
     container_name: rackhost_dns_update
+    platform: linux/arm64
     build:
       dockerfile: Dockerfile
       context: ./src
