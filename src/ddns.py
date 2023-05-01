@@ -37,10 +37,10 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
             given_username = auth_decoded.split(':')[0]
             given_password = auth_decoded.split(':')[1]
             
-            rackhost_username = os.getenv('DDNS_USERNAME')
-            rackhost_password = os.getenv('DDNS_USERNAME')
+            ddns_username = os.getenv('DDNS_USERNAME')
+            ddns_password = os.getenv('DDNS_PASSWORD')
 
-            if (given_username != rackhost_username) or (given_password != rackhost_password):
+            if (given_username != ddns_username) or (given_password != ddns_password):
                 raise Exception('Wrong auth token')
 
             print(f'Update {name}.{domain} to {myip}')
@@ -83,7 +83,7 @@ def main(server_class=http.server.HTTPServer, handler_class=http.server.BaseHTTP
     if not os.getenv('DDNS_USERNAME') or not os.getenv('DDNS_PASSWORD'):
         raise Exception('DDNS_USERNAME or DDNS_PASSWORD not set')
 
-    server_address = ('', 80)
+    server_address = ('', 1080)
     httpd = server_class(server_address, MyHandler)
     
     print("Server started")
