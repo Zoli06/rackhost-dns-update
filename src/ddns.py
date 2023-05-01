@@ -83,7 +83,7 @@ def main(server_class=http.server.HTTPServer, handler_class=http.server.BaseHTTP
     if not os.getenv('DDNS_USERNAME') or not os.getenv('DDNS_PASSWORD'):
         raise Exception('DDNS_USERNAME or DDNS_PASSWORD not set')
 
-    server_address = ('', 1080)
+    server_address = ('', 80)
     httpd = server_class(server_address, MyHandler)
     
     print("Server started")
